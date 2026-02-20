@@ -63,7 +63,7 @@ score = 0.7 * jaccard(user_skills, vacancy_skills) + 0.3 * city_match
 
 1. Клонируй репозиторий:
    bash
-   git clone https://github.com/yourusername/dreamjob.git
+   git clone https://github.com/Joriksss/recomendation.git
    cd dreamjob
 
 3. Установи зависимости:
