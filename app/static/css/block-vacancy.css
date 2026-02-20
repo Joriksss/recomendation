@@ -1,0 +1,110 @@
+.vacancies-section {
+    padding: 120px 20px;
+    background: linear-gradient(
+        180deg,
+        #0f0a1f 0%,
+        #15102b 100%
+    );
+    min-height: 100vh;
+}
+
+.vacancies-title {
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 80px;
+    color: #e7dcff;
+    letter-spacing: 2px;
+}
+
+.vacancies-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+.vacancy-card {
+    width: 700px;
+    padding: 30px;
+
+    border-radius: 20px;
+
+    background: rgba(40, 25, 80, 0.55);
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(140, 100, 255, 0.3);
+
+    box-shadow:
+        0 0 15px rgba(120, 80, 255, 0.4),
+        0 0 40px rgba(80, 120, 255, 0.25);
+
+    color: #ffffff;
+
+    transform: translateX(-120px);
+    opacity: 0;
+
+    transition: all 0.8s ease;
+}
+
+.vacancy-card.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.vacancy-card h3 {
+    font-size: 26px;
+    margin-bottom: 15px;
+    color: #cbb6ff;
+}
+
+.vacancy-card p {
+    margin: 6px 0;
+    color: #d6d0ff;
+}
+
+.vacancy-card a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+
+    border-radius: 12px;
+    text-decoration: none;
+
+    background: linear-gradient(90deg, #7a5cff, #5c7cff);
+    color: white;
+
+    transition: 0.3s;
+}
+
+.vacancy-card a:hover {
+    box-shadow: 0 0 15px #7a5cff;
+}
+
+.salary {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #9f86ff;
+}
+
+.show-more-wrapper {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.show-more-btn {
+    padding: 14px 28px;
+    border-radius: 14px;
+    border: none;
+
+    font-size: 16px;
+    color: white;
+
+    background: linear-gradient(90deg, #7a5cff, #5c7cff);
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.show-more-btn:hover {
+    box-shadow: 0 0 20px #7a5cff;
+}

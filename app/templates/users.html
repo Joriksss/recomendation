@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пользователи</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/users.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+</head>
+<body>
+<header id="header">
+    <div class="container">
+        <div class="logo">DreamJob</div>
+        <nav>
+            <a href="{{ url_for('index') }}" style="text-decoration: none">Главная</a>
+            <a href="#">Вакансии</a>
+            <a href="{{ url_for('users_page') }}" style="text-decoration: none">Пользователи</a>
+        </nav>
+    </div>
+</header>
+
+<div class="page-container">
+    <h1>Наши пользователи</h1>
+
+    <div class="users-window">
+        <div class="top-bar">
+            <input type="text"
+                   class="search-input"
+                   placeholder="Поиск пользователя...">
+
+            <button class="add-btn" onclick="openModal()">
+                Добавить пользователя
+            </button>
+        </div>
+
+        <div class="users-list">
+            {% for user in users %}
+            <div class="user-row">
+
+                <a href="{{ url_for('user_profile', user_id=user.id) }}" class="user-info-link">
+                    <div class="user-info">
+                        <span class="user-name">
+                            {{ user.first_name }} {{ user.last_name }}
+                        </span>
+
+                        <span class="user-meta">
+                            Город: {{ user.city }}
+                            <span class="badge {{ user.level }}">
+                                {{ user.level }}
+                            </span>
+                        </span>
+                    </div>
+                </a>
+
+                <form method="POST" action="/delete_user/{{ user.id }}">
+                    <button class="delete-btn">Удалить</button>
+                </form>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div id="addUserModal" class="modal">
+    <div class="modal-content">
+
+        <h2>Добавить пользователя</h2>
+
+        <form method="POST" action="/add_user">
+            <div class="name-row">
+                <input type="text" name="first_name" placeholder="Имя" required>
+                <input type="text" name="last_name" placeholder="Фамилия" required>
+            </div>
+
+            <select name="city_id" required>
+                {% for city in cities %}
+                    <option value="{{ city.id }}">
+                        {{ city.name }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <select name="level" required>
+                <option value="junior">Junior</option>
+                <option value="middle">Middle</option>
+                <option value="senior">Senior</option>
+                <option value="none">None</option>
+            </select>
+
+            <div class="skills-box">
+                <label>Навыки (можно не выбирать)</label>
+                <div class="skills-grid">
+                    {% for skill in skills %}
+                        <label class="skill-item">
+                            <input type="checkbox"
+                                   name="skills"
+                                   value="{{ skill.id }}">
+                            {{ skill.name }}
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="submit" class="add-btn">Добавить</button>
+                <button type="button"class="delete-btn" onclick="closeModal()">Отмена</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+
+</body>
+</html>

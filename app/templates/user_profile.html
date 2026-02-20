@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Профиль</title>
+    <link rel="stylesheet"href="{{ url_for('static', filename='css/profile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+
+<header id="header">
+    <div class="container">
+        <div class="logo">DreamJob</div>
+        <nav>
+            <a href="{{ url_for('index') }}" style="text-decoration: none">Главная</a>
+            <a href="#">Вакансии</a>
+            <a href="{{ url_for('users_page') }}" style="text-decoration: none">Пользователи</a>
+        </nav>
+    </div>
+</header>
+
+<div class="profile-container">
+    <div class="profile-card">
+
+        <div class="avatar">
+            <img src="/static/img/hero.png">
+        </div>
+
+        <div class="info">
+
+            <h2>
+                {{ user.first_name }} {{ user.last_name }}
+            </h2>
+
+            <div class="meta">
+                Город: {{ user.city }} |
+                Level: {{ user.level }}
+            </div>
+
+            <div class="skills">
+                <span>Skills:</span>
+                {% if skills %}
+                    {% for skill in skills %}
+                        <span class="skill">{{ skill }}</span>
+                    {% endfor %}
+                {% else %}
+                    <span class="skill">Нет навыков</span>
+                {% endif %}
+            </div>
+
+            <div class="description">
+                Описание отсутствует
+            </div>
+
+            {% if skills %}
+            <form method="POST" action="{{ url_for('run_recommendations', user_id=user.id) }}">
+                <button class="rec-btn">
+                    Показать рекомендации
+                </button>
+            </form>
+            {% else %}
+            <button class="rec-btn" disabled
+                    style="background:#64748b; cursor:not-allowed;">
+                Нет навыков — рекомендации недоступны
+            </button>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="recs-card">
+        <h3>Рекомендованные вакансии</h3>
+        {% if recs %}
+            {% for r in recs %}
+            <div class="vac-card">
+                <h4>{{ r[0] }}</h4>
+
+                <div class="vac-meta">
+                    Город: {{ r[1] }} <br>
+                    Опыт: {{ r[2] }} <br>
+                    {{ r[3] or "ЗП не указана" }}
+                </div>
+
+                <a href="{{ r[4] }}" target="_blank" class="open-btn">
+                    Открыть
+                </a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty">
+                Нажмите кнопку, чтобы рассчитать рекомендации
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>
