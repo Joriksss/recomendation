@@ -45,7 +45,7 @@ score = 0.7 * jaccard(user_skills, vacancy_skills) + 0.3 * city_match
 
 ## 🗂️ Структура проекта
 
-![Uploading image.png…]()
+<img width="759" height="657" alt="image" src="https://github.com/user-attachments/assets/5f92f554-2d2a-48e7-b3de-bc7f29833fea" />
 ---
 
 ## ⚙️ Используемые технологии
